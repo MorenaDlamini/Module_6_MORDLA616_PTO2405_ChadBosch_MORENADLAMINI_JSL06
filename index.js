@@ -1,58 +1,112 @@
-// Sample menu data (Consider fetching this data from a server in a real-world scenario)
+// Sample menu data with individual prices
 const menu = {
-    Starters: ["Garlic Bread", "Bruschetta"],
-    MainCourses: ["Margherita Pizza", "Spaghetti Carbonara"],
-    Desserts: ["Tiramisu", "Cheesecake"]
+    Starters: [
+        { name: "Garlic Bread", price: 80 },
+        { name: "Bruschetta", price: 69 }
+    ],
+    MainCourses: [
+        { name: "Margherita Pizza", price: 140 },
+        { name: "Spaghetti Carbonara", price: 200 }
+    ],
+    Desserts: [
+        { name: "Tiramisu", price: 150 },
+        { name: "Cheesecake", price: 180 }
+    ]
 };
 
-// Function to display menu items by category
+let orderPlaced = false; // Track if the order has been placed
+
 function displayMenuItems(menu) {
-    // Get the menu container element from the HTML
+    const menuContainer = document.getElementById('menu');
+    
+    for (let category in menu) {
+        // Create and append the category name
+        const categoryElement = document.createElement('h3');
+        categoryElement.textContent = category;
+        menuContainer.appendChild(categoryElement);
 
-    // Loop through each category and its items in the menu object
-
-        // Create an element to represent the category
-
-        // Set the text content of the category element to the category name
-
-        // Append the category element to the menu container
-
-        // Create an element to represent a list of items
-
-        // Append a list of items element to the menu container
-
-        // Loop through the items in the category and create list items
-
+        // Create a list of items for each category
+        const itemList = document.createElement('ul');
+        menu[category].forEach(item => {
             // Create a list item element
+            const listItem = document.createElement('li');
+            listItem.textContent = `${item.name} - R${item.price}`;
 
-            // Set the text content of the list item element to the item name
-
-            // Attach a click event listener to the list item to add it to the order
-
-            // Append the list item to the list of items
-
-            
+            // Attach event listener with the correct item name and price
+            listItem.addEventListener('click', () => addToOrder(item));
+            itemList.appendChild(listItem);
+        });
+        menuContainer.appendChild(itemList);
+    }
 }
 
-// Callback function for adding an item to the order
-function addToOrder(itemName) {
-    // Get the order items list and the order total element from the HTML
+function addToOrder(item) {
+    // Ensure the "Place Order" button is visible
+    document.getElementById('order-button').style.display = 'block';
 
-    // Create a list item for the order
+    const orderItemsList = document.getElementById('order-items');
+    const orderTotalElement = document.getElementById('order-total');
+    const totalParagraph = orderTotalElement.parentElement;
 
-    // Set the text content of the list item to the item name
+    // A new order item element
+    const orderItem = document.createElement('li');
+    orderItem.textContent = `${item.name} - R${item.price}`;
 
-    // Append the list item to the order items list
+    // An 'X' button for removing the item
+    const removeButton = document.createElement('span');
+    removeButton.textContent = ' X';
+    removeButton.style.color = 'grey';
+    removeButton.style.cursor = 'pointer';
+    removeButton.style.marginLeft = '10px';
 
-    // Calculate and update the total price
+    // Event listener for removing the item
+    removeButton.addEventListener('click', function() {
+        if (!orderPlaced) {
+            const confirmation = confirm(`Are you sure you want to remove ${item.name}?`);
+            if (confirmation) {
+                orderItemsList.removeChild(orderItem);
+                let currentTotal = parseFloat(orderTotalElement.textContent);
+                currentTotal -= item.price;
+                orderTotalElement.textContent = currentTotal.toFixed(2);
+            }
+        }
+    });
 
-    // Update the text content of the order total element with the new total
+    orderItem.appendChild(removeButton);
+    orderItemsList.appendChild(orderItem);
+
+    // Update the total price
+    let currentTotal = parseFloat(orderTotalElement.textContent);
+    currentTotal += item.price;
+    orderTotalElement.textContent = currentTotal.toFixed(2);
+
+    // Set the color of the total to white
+    totalParagraph.style.color = 'white';
 }
 
-// Function to initialize the menu system
+// Event listener for "Place Order" button
+document.getElementById('order-button').addEventListener('click', function() {
+    orderPlaced = true; // Disable removal after order is placed
+
+    if (!document.getElementById('thank-you-message')) {
+        const thankYouMessage = document.createElement('p');
+        thankYouMessage.id = 'thank-you-message';
+        thankYouMessage.textContent = 'Thank you for placing your order!';
+        thankYouMessage.style.color = 'white';
+        thankYouMessage.style.fontWeight = 'bold';
+        thankYouMessage.style.marginTop = '10px';
+        const orderButton = document.getElementById('order-button');
+        orderButton.parentNode.insertBefore(thankYouMessage, orderButton.nextSibling);
+    }
+});
+
+// Hide the "Place Order" button initially
+document.getElementById('order-button').style.display = 'none';
+
+// Initialize the menu system with dynamic menu items
 function initMenuSystem(menu) {
-    // Call the function to display menu items
+    displayMenuItems(menu);
 }
 
-// Start the menu system by calling the init function
+// Initialize the menu when the page loads
 initMenuSystem(menu);
