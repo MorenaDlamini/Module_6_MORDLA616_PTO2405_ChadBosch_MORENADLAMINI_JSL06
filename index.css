@@ -4,14 +4,16 @@ body, h1, h2, p, ul {
     padding: 0;
 }
 
+/* Body styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     margin: 0; /* Add this to reset body margin */
 }
 
+/* Header styling */
 header {
-    background-color: #007bff;
+    background-color: #af7b0a;
     color: #fff;
     text-align: center;
     padding: 1rem 0;
@@ -26,17 +28,35 @@ header p {
     font-size: 1rem;
 }
 
+/* Main layout container */
 main {
     display: flex;
     justify-content: space-between;
     margin: 2rem;
 }
 
-#menu, #order {
-    background-color: #fff;
+/* Menu section styling */
+#menu {
+    max-width: 60%;
+    overflow-y: auto;
+    background-image: url('images/menu.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: normal; /* Try without blending first */
+    opacity: 0.9; /* Adjust only if needed */
     padding: 1rem;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+/* Order section styling */
+#menu, #order {
+    background-color: rgb(73, 71, 71);
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(37, 37, 37, 0.1);
     flex: 1;
 }
 
@@ -51,26 +71,50 @@ main {
     padding-bottom: 4em;
 }
 
+/* Menu and order headings */
 #menu h3, #order h2 {
+    color: white;
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
+/* List styling for menu and order */
 #menu ul, #order ul {
     list-style: none;
     padding: 0;
 }
 
 #menu li, #order li {
+    color: rgb(197, 139, 13);
+    font-weight: bold;
     margin-bottom: 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s ease; /* Add this for the animation */
 }
 
+/* Order total styling */
 #order-total {
+    color: white;
     font-weight: bold;
 }
 
+/* Order button styling */
+#order-button {
+    background-color: rgb(236, 162, 23); /* White button background */
+    color: rgb(255, 255, 255); /* Goldish text color */
+    font-weight: bold; /* Bold font */
+    padding: 5px 10px; /* Button padding */
+    border: 2px solid rgba(197, 169, 10, 0.877); /* Optional gold border */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Pointer on hover */
+}
+
+#order-button:hover {
+    background-color: rgb(41, 48, 47); /* Change background on hover */
+    color: white; /* Text color on hover */
+}
+
+/* Footer styling */
 footer {
     text-align: center;
     padding: 1rem 0;
@@ -80,3 +124,7 @@ footer {
     bottom: 0; /* Add this to position it at the bottom */
     width: 100%; /* Add this to span the full width */
 }
+
+
+
+
