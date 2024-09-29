@@ -57,3 +57,11 @@ To complete this challenge, follow these steps:
 3. We will consider the commit history and meaningful commit messages to evaluate your coding process.
 
 By following these steps and completing the challenge, you will demonstrate your ability to create interactive web applications using JavaScript. Good luck, and enjoy building the CodeCuisine Menu Display System!
+
+## Additions done on the Project:
+
+1. Added background image using css.
+2. Added Remove item with confirmation in Javascript.
+3. Added 'X' button next to order items to enable the user's to remove items.
+4. Added a function where if the order button has been clicked the user will not be able to remove any items.
+5. Added a Order button hidden element in Javascript.
